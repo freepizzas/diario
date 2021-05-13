@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, Nav.class);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
