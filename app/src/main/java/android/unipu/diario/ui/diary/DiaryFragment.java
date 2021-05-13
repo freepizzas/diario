@@ -23,13 +23,13 @@ public class DiaryFragment extends Fragment {
         diaryViewModel =
                 new ViewModelProvider(this).get(android.unipu.diario.ui.diary.DiaryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
-        final TextView textView = root.findViewById(R.id.text_diary);
-        diaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_diary);
+//        diaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }
