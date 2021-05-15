@@ -21,7 +21,7 @@
             android:paddingRight="25dp">
 
             <TextView
-                android:id="@+id/text_diary"
+                android:id="@+id/text_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"

@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/home/outline_home_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/save_alt/baseline_save_alt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,7 +33,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_outline_home_24" />
+                            <entry key="outputName" value="ic_export" />
                             <entry key="sourceFile" value="C:\Users\nikki\Desktop\N\downloads\D o w n l o a d s\LANDING.svg" />
                           </map>
                         </option>
