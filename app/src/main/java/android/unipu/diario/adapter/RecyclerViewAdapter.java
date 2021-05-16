@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,13 +24,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int VIEW_TYPE_CALENDAR = 1;
     private static final int VIEW_TYPE_ENTRIES = 2;
 
-    private Context context;
+    public Context context;
     public static Date currentDate;
     public ArrayList<Entry> entries;
     private final OnItemClickListener onItemClickListener;
 
     // Constructor
     public RecyclerViewAdapter(ArrayList<Entry> entries, OnItemClickListener onItemClickListener) {
+        this.currentDate = new Date();
         this.entries = entries;
         this.onItemClickListener = onItemClickListener;
     }
@@ -49,13 +51,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (viewType == VIEW_TYPE_CALENDAR) {
-//            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_calendar, parent, false);
-//            return new CalendarViewHolder(v);
-//        } else {
+        if (viewType == VIEW_TYPE_CALENDAR) {
+            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entry_list, parent, false);
+            return new CalendarViewHolder(v);
+        } else {
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entry_list, parent, false);
             return new EntryViewHolder(v, onItemClickListener);
-        //}
+        }
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
@@ -67,23 +69,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-//    // ViewHolders
-//    public class CalendarViewHolder extends RecyclerView.ViewHolder {
-//        private CalendarView calendarView;
-//
-//        public CalendarViewHolder(final ViewGroup itemView) {
-//            super(itemView);
-//            //ButterKnife.bind(this, itemView);
-//
-//            calendarView.setOnDateSelectedListener(new CalendarView.OnDateSelectedListener() {
+    public class CalendarViewHolder extends RecyclerView.ViewHolder {
+        private CalendarView calendarView;
+
+        public CalendarViewHolder(final ViewGroup itemView) {
+            super(itemView);
+//            calendarView = itemView.findViewById(R.id.calendarView);
+//            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 //                @Override
-//                public void onDateSelected(@NonNull Date date) {
-//                    currentDate = date;
-//                    refreshNotes();
+//                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+//                    refreshEntries();
+//
 //                }
 //            });
-//        }
-//    }
+        }
+    }
+
+    public void refreshEntries() {
+        entries = EntryDatabase.getInstance(context).getEntriesOnDate(currentDate);
+        notifyDataSetChanged();
+        if (entries.isEmpty()) {
+            SimpleDateFormat fmt = new SimpleDateFormat("dd MMM yyyy");
+            Toast.makeText(context, "No entries found for " + fmt.format(currentDate), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public class EntryViewHolder extends RecyclerView.ViewHolder {
         private View entryItem;

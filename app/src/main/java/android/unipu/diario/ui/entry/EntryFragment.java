@@ -8,6 +8,7 @@ import android.unipu.diario.db.EntryDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,47 +65,8 @@ public class EntryFragment extends Fragment implements RecyclerViewAdapter.OnIte
 //
 //                    case R.id.note_delete:
 //                        new AlertDialog.Builder(context)
-//                                .setTitle("Delete Note")
-//                                .setMessage("Are you sure you want to delete the note?")
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        NotesDatabase.getInstance(context).deleteNoteAt(position);
-//                                        adapter.notifyItemRemoved(position);
-//                                        refreshLayout();
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, null)
-//                                .show();
-//                        return true;
-//
-//                    default:
-//                        return false;
-//                }
-//            }
-//        });
-//        popupMenu.show();
-//    }    @Override
-//    public void onItemClicked(int position) {
-//        Intent intent = new Intent(getActivity(), ViewActivity.class);
-//        intent.putExtra(ViewActivity.ACTION_TYPE_KEY, ViewActivity.ACTION_TYPE_EDIT);
-//        intent.putExtra(ViewActivity.NOTE_ID_KEY, adapter.notes.get(position).id);
-//        startActivity(intent);
-//    }
-//    @Override
-//    public void onLongClicked(View view, final int position) {
-//        final Context context = getContext();
-//        PopupMenu popupMenu = new PopupMenu(context, view);
-//        popupMenu.inflate(R.menu.menu_delete);
-//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()) {
-//
-//                    case R.id.note_delete:
-//                        new AlertDialog.Builder(context)
-//                                .setTitle("Delete Note")
-//                                .setMessage("Are you sure you want to delete the note?")
+//                                .setTitle("Delete entry")
+//                                .setMessage("Are you sure you want to delete this entry?")
 //                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 //                                    @Override
 //                                    public void onClick(DialogInterface dialogInterface, int i) {

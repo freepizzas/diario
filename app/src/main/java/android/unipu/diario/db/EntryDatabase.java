@@ -40,7 +40,6 @@ public class EntryDatabase {
             editor.putString(LIST_ENTRIES, json);
             editor.apply();
         } else {
-            // Load notes from storage
             String json = preferences.getString(LIST_ENTRIES, "");
             entries = gson.fromJson(json, EntryWrapper.class).getEntries();
         }

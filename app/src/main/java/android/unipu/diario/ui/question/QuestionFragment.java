@@ -48,7 +48,6 @@ public class QuestionFragment extends Fragment {
         entryTitle.setText(getQuestions(false));
 
         entryBody = root.findViewById(R.id.entry_body);
-        Log.i("body", String.valueOf(entryBody.getText()));
 
         indexTotal = EntryDatabase.getInstance(thisContext).getLastId();
         saveBtn = root.findViewById(R.id.saveBtn);
