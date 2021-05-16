@@ -1,35 +1,37 @@
 package android.unipu.diario.ui.diary;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.unipu.diario.db.EntryDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.unipu.diario.R;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class DiaryFragment extends Fragment {
 
-    private android.unipu.diario.ui.diary.DiaryViewModel diaryViewModel;
+    private TextView entryTitle;
+    private EditText entryBody;
+    private Integer index;
+    Context thisContext;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        diaryViewModel =
-                new ViewModelProvider(this).get(android.unipu.diario.ui.diary.DiaryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
-//        final TextView textView = root.findViewById(R.id.text_diary);
-//        diaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        thisContext = container.getContext();
+
+        entryTitle = root.findViewById(R.id.entry_title);
+        index = EntryDatabase.getInstance(thisContext).getLastIdNoQ();
+        entryTitle.setText("Entry #" + index);
+
+        entryBody = root.findViewById(R.id.entry_body);
+
         return root;
     }
 }

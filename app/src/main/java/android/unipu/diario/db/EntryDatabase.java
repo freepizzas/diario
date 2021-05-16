@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 public class EntryDatabase {
 
@@ -49,8 +48,8 @@ public class EntryDatabase {
 
     private ArrayList<Entry> getDummyEntries() {
         entries = new ArrayList<>();
-        entries.add(new Entry(UUID.randomUUID().toString(), "Entry #1", "ahhhhhhhhhhhh"));
-        entries.add(new Entry(UUID.randomUUID().toString(), "Entry #2", "sdasdad"));
+        entries.add(new Entry(1, false, "Entry #1", "ahhhhhhhhhhhh"));
+        entries.add(new Entry(2, false, "Entry #2", "sdasdad"));
         return entries;
     }
 
@@ -72,9 +71,19 @@ public class EntryDatabase {
         return entriesOnDate;
     }
 
-    public Entry getEntryByID(String entryId) {
+    public Integer getLastIdNoQ() {
+        int index = 1;
         for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).id.equals(entryId)) {
+            if (!entries.get(i).question) {
+                index++;
+            }
+        }
+        return index;
+    }
+
+    public Entry getEntryByID(Integer entryId) {
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).id == entryId) {
                 return entries.get(i);
             }
         }
@@ -91,9 +100,9 @@ public class EntryDatabase {
         commit();
     }
 
-    public void deleteEntryWithId(String entryId) {
+    public void deleteEntryWithId(Integer entryId) {
         for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).id.equals(entryId)) {
+            if (entries.get(i).id == entryId) {
                 entries.remove(i);
                 break;
             }

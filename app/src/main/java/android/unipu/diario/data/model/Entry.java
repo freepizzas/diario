@@ -5,7 +5,8 @@ import java.util.Locale;
 
 public class Entry {
 
-    public String id;
+    public Integer id;
+    public Boolean question;
     public String title;
     public String body;
     public Calendar calendar;
@@ -40,15 +41,17 @@ public class Entry {
 
     }
 
-    public Entry(String id, String title, String body) {
+    public Entry(Integer id, Boolean question, String title, String body) {
         this.id = id;
+        this.question = question;
         this.title = title;
         this.body = body;
         this.calendar = Calendar.getInstance();
     }
 
-    public Entry(String id, String title, String body, Calendar calendar) {
+    public Entry(Integer id, Boolean question, String title, String body, Calendar calendar) {
         this.id = id;
+        this.question = question;
         this.title = title;
         this.body = body;
         this.calendar = calendar;

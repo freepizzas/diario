@@ -21,7 +21,7 @@
             android:paddingRight="25dp">
 
             <TextView
-                android:id="@+id/text_question"
+                android:id="@+id/entry_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
@@ -39,7 +39,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/newQBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00FFFFFF"
@@ -62,10 +62,13 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/textView"
+                        android:id="@+id/entry_body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:background="@null"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Write something..."
+                        android:textColor="#BE000000" />
                 </LinearLayout>
             </ScrollView>
 
@@ -78,7 +81,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
+                android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
