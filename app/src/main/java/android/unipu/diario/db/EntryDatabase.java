@@ -81,6 +81,11 @@ public class EntryDatabase {
         return index;
     }
 
+    public Integer getLastId() {
+        int lastIndex = entries.size() - 1;
+        return entries.get(lastIndex).id;
+    }
+
     public Entry getEntryByID(Integer entryId) {
         for (int i = 0; i < entries.size(); i++) {
             if (entries.get(i).id == entryId) {

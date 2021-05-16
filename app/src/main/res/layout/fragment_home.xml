@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:id="@+id/navigation_home">
 
     <RelativeLayout
         android:layout_width="match_parent"
