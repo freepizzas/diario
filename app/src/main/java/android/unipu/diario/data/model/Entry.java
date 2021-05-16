@@ -11,6 +11,10 @@ public class Entry {
     public String body;
     public Calendar calendar;
 
+    public String getBodyNoNLines() {
+        return body.replace("\n", " ");
+    }
+
     public String getHourAndMin() {
         String hour = Integer.toString(calendar.get(Calendar.HOUR));
         if (hour.length() == 1) {

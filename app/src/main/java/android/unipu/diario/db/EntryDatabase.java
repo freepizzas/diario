@@ -49,7 +49,6 @@ public class EntryDatabase {
     private ArrayList<Entry> getDummyEntries() {
         entries = new ArrayList<>();
         entries.add(new Entry(1, false, "Entry #1", "ahhhhhhhhhhhh"));
-        entries.add(new Entry(2, false, "Entry #2", "sdasdad"));
         return entries;
     }
 

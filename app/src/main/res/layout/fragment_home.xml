@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:letterSpacing="0.02"
-            android:text="Last entries"
+            android:text="All entries"
             android:textColor="#516b9e"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -68,13 +68,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="466dp">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <fragment
+            android:id="@+id/fragment_entry"
+            android:name="android.unipu.diario.ui.entry.EntryFragment"
             android:layout_width="match_parent"
-            android:layout_height="259dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="15dp" />
+            android:layout_height="431dp"
+            android:paddingLeft="15dp"
+            tools:layout="@layout/fragment_entry" />
     </RelativeLayout>
 
 
