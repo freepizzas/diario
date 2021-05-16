@@ -5,10 +5,10 @@ import java.util.Locale;
 
 public class Entry {
 
-    private String id;
-    private String title;
-    private String body;
-    private Calendar calendar;
+    public String id;
+    public String title;
+    public String body;
+    public Calendar calendar;
 
     public String getHourAndMin() {
         String hour = Integer.toString(calendar.get(Calendar.HOUR));
