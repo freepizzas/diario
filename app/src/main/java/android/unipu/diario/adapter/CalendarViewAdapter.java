@@ -8,21 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int VIEW_TYPE_CALENDAR = 1;
-    private static final int VIEW_TYPE_ENTRIES = 2;
+public class CalendarViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public Context context;
     public static Date currentDate;
@@ -30,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final OnItemClickListener onItemClickListener;
 
     // Constructor
-    public RecyclerViewAdapter(ArrayList<Entry> entries, OnItemClickListener onItemClickListener) {
+    public CalendarViewAdapter(ArrayList<Entry> entries, OnItemClickListener onItemClickListener) {
         this.currentDate = new Date();
         this.entries = entries;
         this.onItemClickListener = onItemClickListener;
@@ -39,34 +34,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Adapter Methods
     @Override
     public int getItemCount() {
-        return entries.size() + 1;
+        return entries.size();
     }
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0) {
-            return VIEW_TYPE_CALENDAR;
-        } else {
-            return VIEW_TYPE_ENTRIES;
-        }
-    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_CALENDAR) {
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entry_list, parent, false);
             return new CalendarViewHolder(v);
-        } else {
-            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entry_list, parent, false);
-            return new EntryViewHolder(v, onItemClickListener);
-        }
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        if (getItemViewType(position) == VIEW_TYPE_ENTRIES) {
-            Entry entry = entries.get(position - 1);
-            EntryViewHolder holder = (EntryViewHolder) viewHolder;
-            holder.entryTitle.setText(entry.title);
-            holder.entryBody.setText(entry.getBodyNoNLines());
-        }
+            Entry entry = entries.get(position);
+//            EntryViewHolder holder = (EntryViewHolder) viewHolder;
+//            holder.entryTitle.setText(entry.title);
+//            holder.entryBody.setText(entry.getBodyNoNLines());
+
     }
 
     public class CalendarViewHolder extends RecyclerView.ViewHolder {
@@ -91,33 +73,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (entries.isEmpty()) {
             SimpleDateFormat fmt = new SimpleDateFormat("dd MMM yyyy");
             Toast.makeText(context, "No entries found for " + fmt.format(currentDate), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public class EntryViewHolder extends RecyclerView.ViewHolder {
-        private View entryItem;
-        private TextView entryTitle;
-        private TextView entryBody;
-
-        public EntryViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener) {
-            super(itemView);
-            entryItem = itemView.findViewById(R.id.entry_item);
-            entryTitle = itemView.findViewById(R.id.entry_title);
-            entryBody = itemView.findViewById(R.id.entry_body);
-
-            entryItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onItemClickListener.onItemClicked(getAdapterPosition());
-                }
-            });
-            entryItem.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    onItemClickListener.onLongClicked(view, getAdapterPosition());
-                    return true;
-                }
-            });
         }
     }
 

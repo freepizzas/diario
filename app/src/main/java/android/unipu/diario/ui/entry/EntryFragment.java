@@ -1,26 +1,21 @@
 package android.unipu.diario.ui.entry;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.unipu.diario.R;
-import android.unipu.diario.adapter.RecyclerViewAdapter;
+import android.unipu.diario.adapter.ListViewAdapter;
 import android.unipu.diario.db.EntryDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EntryFragment extends Fragment implements RecyclerViewAdapter.OnItemClickListener {
+public class EntryFragment extends Fragment implements ListViewAdapter.OnItemClickListener {
 
-    private RecyclerViewAdapter adapter;
+    private ListViewAdapter adapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -31,7 +26,7 @@ public class EntryFragment extends Fragment implements RecyclerViewAdapter.OnIte
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerViewAdapter(EntryDatabase.getInstance(getActivity()).getEntries(), this);
+        adapter = new ListViewAdapter(EntryDatabase.getInstance(getActivity()).getEntries(), this);
         recyclerView.setAdapter(adapter);
         return root;
     }
