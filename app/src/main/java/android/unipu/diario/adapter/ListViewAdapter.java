@@ -3,21 +3,13 @@ package android.unipu.diario.adapter;
 import android.content.Context;
 import android.unipu.diario.R;
 import android.unipu.diario.data.model.Entry;
-import android.unipu.diario.db.EntryDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

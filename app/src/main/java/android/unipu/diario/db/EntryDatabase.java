@@ -6,6 +6,7 @@ import android.unipu.diario.data.model.Entry;
 
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,17 +58,17 @@ public class EntryDatabase {
         return entries;
     }
 
-//    public ArrayList<Entry> getEntriesOnDate(Date date) {
-//        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-//        ArrayList<Entry> entriesOnDate = new ArrayList<>();
-//        for (int i = 0; i < entries.size(); i++) {
-//            boolean isSameDay = fmt.format(date).equals(fmt.format(entries.get(i).calendar.getTime()));
-//            if (isSameDay) {
-//                entriesOnDate.add(entries.get(i));
-//            }
-//        }
-//        return entriesOnDate;
-//    }
+    public ArrayList<Entry> getEntriesOnDate(String date) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        ArrayList<Entry> entriesOnDate = new ArrayList<>();
+        for (int i = 0; i < entries.size(); i++) {
+            boolean isSameDay = date.equals(df.format(entries.get(i).date));
+            if (isSameDay) {
+                entriesOnDate.add(entries.get(i));
+            }
+        }
+        return entriesOnDate;
+    }
 
     public Integer getLastIdNoQ() {
         int index = 1;

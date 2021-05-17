@@ -2,26 +2,27 @@ package android.unipu.diario.ui.entry;
 
 import android.os.Bundle;
 import android.unipu.diario.R;
-import android.unipu.diario.adapter.CalendarViewAdapter;
 import android.unipu.diario.adapter.ListViewAdapter;
+import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
-import android.unipu.diario.ui.calendar.CalendarFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EntryFragment extends Fragment implements ListViewAdapter.OnItemClickListener, CalendarViewAdapter.OnItemClickListener {
+import java.util.ArrayList;
+
+public class EntryFragment extends Fragment implements ListViewAdapter.OnItemClickListener {
 
     private ListViewAdapter lAdapter;
-    private CalendarViewAdapter cAdapter;
     private RecyclerView recyclerView;
+    public ArrayList<Entry> entries;
+    public String selectedDate;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,14 +31,17 @@ public class EntryFragment extends Fragment implements ListViewAdapter.OnItemCli
         recyclerView = root.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        Fragment parent = getParentFragment();
-        if (parent.getClass().equals("class android.unipu.diario.ui.calendar.CalendarFragment")) {
-            cAdapter = new CalendarViewAdapter(EntryDatabase.getInstance(getActivity()).getEntries(), this);
-            recyclerView.setAdapter(cAdapter);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            selectedDate = bundle.getString("selectedDate");
+            entries = EntryDatabase.getInstance(getActivity()).getEntriesOnDate(selectedDate);
         } else {
-            lAdapter = new ListViewAdapter(EntryDatabase.getInstance(getActivity()).getEntries(), this);
-            recyclerView.setAdapter(lAdapter);
+            entries = EntryDatabase.getInstance(getActivity()).getEntries();
         }
+
+        lAdapter = new ListViewAdapter(entries, this);
+        recyclerView.setAdapter(lAdapter);
 
         return root;
     }

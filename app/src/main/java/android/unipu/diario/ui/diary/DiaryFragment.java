@@ -2,10 +2,8 @@ package android.unipu.diario.ui.diary;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.unipu.diario.MainActivity;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
-import android.unipu.diario.ui.home.HomeFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +11,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-
 import android.unipu.diario.R;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
