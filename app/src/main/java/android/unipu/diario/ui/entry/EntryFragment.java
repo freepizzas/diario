@@ -1,13 +1,20 @@
 package android.unipu.diario.ui.entry;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.unipu.diario.MainActivity;
 import android.unipu.diario.R;
 import android.unipu.diario.adapter.ListViewAdapter;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,7 +29,6 @@ public class EntryFragment extends Fragment implements ListViewAdapter.OnItemCli
     private RecyclerView recyclerView;
     public ArrayList<Entry> entries;
     public String selectedDate;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,52 +54,35 @@ public class EntryFragment extends Fragment implements ListViewAdapter.OnItemCli
 
     @Override
     public void onItemClicked(int position) {
-
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("action_type", "edit");
+        intent.putExtra("entry_id", lAdapter.entries.get(position).id);
+        startActivity(intent);
     }
 
     @Override
-    public void onLongClicked(View view, int position) {
-
+    public void onLongClicked(View view, final int position) {
+        final Context context = getContext();
+        new AlertDialog.Builder(context)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EntryDatabase.getInstance(context).deleteEntryAt(position);
+                        lAdapter.notifyItemRemoved(position);
+                        refreshList();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
     }
 
-//    @Override
-//    public void onItemClicked(int position) {
-//        Intent intent = new Intent(getActivity(), ViewActivity.class);
-//        intent.putExtra(ViewActivity.ACTION_TYPE_KEY, ViewActivity.ACTION_TYPE_EDIT);
-//        intent.putExtra(ViewActivity.NOTE_ID_KEY, adapter.notes.get(position).id);
-//        startActivity(intent);
-//    }
-//    @Override
-//    public void onLongClicked(View view, final int position) {
-//        final Context context = getContext();
-//        PopupMenu popupMenu = new PopupMenu(context, view);
-//        popupMenu.inflate(R.menu.menu_delete);
-//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()) {
-//
-//                    case R.id.note_delete:
-//                        new AlertDialog.Builder(context)
-//                                .setTitle("Delete entry")
-//                                .setMessage("Are you sure you want to delete this entry?")
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        NotesDatabase.getInstance(context).deleteNoteAt(position);
-//                                        adapter.notifyItemRemoved(position);
-//                                        refreshLayout();
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, null)
-//                                .show();
-//                        return true;
-//
-//                    default:
-//                        return false;
-//                }
-//            }
-//        });
-//        popupMenu.show();
-//    }
+    public void refreshList() {
+        if (lAdapter.entries.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
 }

@@ -18,6 +18,8 @@ public class EntryDatabase {
 
     private Gson gson;
     private Context context;
+    private int index = 1;
+    private int lastIndex = 0;
 
     private static EntryDatabase instance;
 
@@ -70,19 +72,20 @@ public class EntryDatabase {
         return entriesOnDate;
     }
 
-    public Integer getLastIdNoQ() {
-        int index = 1;
-        for (int i = 0; i < entries.size(); i++) {
-            if (!entries.get(i).question) {
-                index++;
-            }
-        }
+    public Integer augmentEntryN(){
+        return index++;
+    }
+
+    public Integer getEntryN(){
         return index;
     }
 
     public Integer getLastId() {
-        int lastIndex = entries.size() - 1;
-        return entries.get(lastIndex).id;
+        if (entries.size() != 0) {
+            lastIndex = entries.size() - 1;
+            return entries.get(lastIndex).id;
+        }
+        return 0;
     }
 
     public Entry getEntryByID(Integer entryId) {
@@ -104,15 +107,6 @@ public class EntryDatabase {
         commit();
     }
 
-    public void deleteEntryWithId(Integer entryId) {
-        for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).id == entryId) {
-                entries.remove(i);
-                break;
-            }
-        }
-        commit();
-    }
 
     public void commit() {
         String json = gson.toJson(new EntryWrapper(entries));

@@ -36,11 +36,10 @@ public class DiaryFragment extends Fragment {
         thisContext = container.getContext();
 
         entryTitle = root.findViewById(R.id.entry_title);
-        indexEntry = EntryDatabase.getInstance(thisContext).getLastIdNoQ();
+        indexEntry = EntryDatabase.getInstance(thisContext).getEntryN();
         entryTitle.setText("Entry #" + indexEntry);
 
         entryBody = root.findViewById(R.id.entry_body);
-        Log.i("body", String.valueOf(entryBody.getText()));
 
         indexTotal = EntryDatabase.getInstance(thisContext).getLastId();
         saveBtn = root.findViewById(R.id.saveBtn);
@@ -48,6 +47,7 @@ public class DiaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EntryDatabase.getInstance(thisContext).addEntry(new Entry(indexTotal, false, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
+                EntryDatabase.getInstance(thisContext).augmentEntryN();
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }
