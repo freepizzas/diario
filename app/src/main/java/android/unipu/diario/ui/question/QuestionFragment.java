@@ -26,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -54,7 +55,7 @@ public class QuestionFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EntryDatabase.getInstance(thisContext).addEntry(new Entry(indexTotal, true, entryTitle.getText().toString(), entryBody.getText().toString()));
+                EntryDatabase.getInstance(thisContext).addEntry(new Entry(indexTotal, true, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }

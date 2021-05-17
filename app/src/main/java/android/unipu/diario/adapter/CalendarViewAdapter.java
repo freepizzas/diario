@@ -19,7 +19,6 @@ import java.util.Date;
 
 public class CalendarViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public Context context;
     public static Date currentDate;
     public ArrayList<Entry> entries;
     private final OnItemClickListener onItemClickListener;
@@ -45,34 +44,35 @@ public class CalendarViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             Entry entry = entries.get(position);
-//            EntryViewHolder holder = (EntryViewHolder) viewHolder;
-//            holder.entryTitle.setText(entry.title);
-//            holder.entryBody.setText(entry.getBodyNoNLines());
-
+            CalendarViewHolder holder = (CalendarViewHolder) viewHolder;
+            holder.entryTitle.setText(entry.title);
+            holder.entryBody.setText(entry.getBodyNoNLines());
     }
 
     public class CalendarViewHolder extends RecyclerView.ViewHolder {
-        private CalendarView calendarView;
+        private View entryItem;
+        private TextView entryTitle;
+        private TextView entryBody;
 
         public CalendarViewHolder(final ViewGroup itemView) {
             super(itemView);
-//            calendarView = itemView.findViewById(R.id.calendarView);
-//            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//                @Override
-//                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-//                    refreshEntries();
-//
-//                }
-//            });
-        }
-    }
+            entryItem = itemView.findViewById(R.id.entry_item);
+            entryTitle = itemView.findViewById(R.id.entry_title);
+            entryBody = itemView.findViewById(R.id.entry_body);
 
-    public void refreshEntries() {
-        entries = EntryDatabase.getInstance(context).getEntriesOnDate(currentDate);
-        notifyDataSetChanged();
-        if (entries.isEmpty()) {
-            SimpleDateFormat fmt = new SimpleDateFormat("dd MMM yyyy");
-            Toast.makeText(context, "No entries found for " + fmt.format(currentDate), Toast.LENGTH_SHORT).show();
+            entryItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+            entryItem.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    onItemClickListener.onLongClicked(view, getAdapterPosition());
+                    return true;
+                }
+            });
         }
     }
 

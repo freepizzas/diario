@@ -47,7 +47,7 @@ public class EntryDatabase {
 
     private ArrayList<Entry> getDummyEntries() {
         entries = new ArrayList<>();
-        entries.add(new Entry(1, false, "Entry #1", "ahhhhhhhhhhhh"));
+        entries.add(new Entry(1, false, "Entry #1", "ahhhhhhhhhhhh", new Date()));
         return entries;
     }
 
@@ -57,17 +57,17 @@ public class EntryDatabase {
         return entries;
     }
 
-    public ArrayList<Entry> getEntriesOnDate(Date date) {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        ArrayList<Entry> entriesOnDate = new ArrayList<>();
-        for (int i = 0; i < entries.size(); i++) {
-            boolean isSameDay = fmt.format(date).equals(fmt.format(entries.get(i).calendar.getTime()));
-            if (isSameDay) {
-                entriesOnDate.add(entries.get(i));
-            }
-        }
-        return entriesOnDate;
-    }
+//    public ArrayList<Entry> getEntriesOnDate(Date date) {
+//        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+//        ArrayList<Entry> entriesOnDate = new ArrayList<>();
+//        for (int i = 0; i < entries.size(); i++) {
+//            boolean isSameDay = fmt.format(date).equals(fmt.format(entries.get(i).calendar.getTime()));
+//            if (isSameDay) {
+//                entriesOnDate.add(entries.get(i));
+//            }
+//        }
+//        return entriesOnDate;
+//    }
 
     public Integer getLastIdNoQ() {
         int index = 1;
