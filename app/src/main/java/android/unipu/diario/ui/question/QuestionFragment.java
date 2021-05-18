@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class QuestionFragment extends Fragment {
 
     private TextView entryTitle;
     private EditText entryBody;
-    private Integer indexTotal;
     private FloatingActionButton saveBtn;
     private ImageButton newQBtn;
     Context thisContext;
@@ -50,12 +50,11 @@ public class QuestionFragment extends Fragment {
 
         entryBody = root.findViewById(R.id.entry_body);
 
-        indexTotal = EntryDatabase.getInstance(thisContext).getLastId();
         saveBtn = root.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EntryDatabase.getInstance(thisContext).addEntry(new Entry(indexTotal, true, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
+                EntryDatabase.getInstance(thisContext).addEntry(new Entry(UUID.randomUUID().toString(), true, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }

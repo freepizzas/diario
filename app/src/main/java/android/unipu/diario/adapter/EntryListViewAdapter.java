@@ -11,13 +11,13 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class ListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EntryListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public Context context;
     public ArrayList<Entry> entries;
     private final OnItemClickListener onItemClickListener;
 
-    public ListViewAdapter(ArrayList<Entry> entries, OnItemClickListener onItemClickListener) {
+    public EntryListViewAdapter(ArrayList<Entry> entries, OnItemClickListener onItemClickListener) {
         this.entries = entries;
         this.onItemClickListener = onItemClickListener;
     }

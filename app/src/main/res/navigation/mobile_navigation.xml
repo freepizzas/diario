@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_diary"
-        android:name="android.unipu.diario.ui.diary.DiaryFragment"
+        android:name="android.unipu.diario.ui.entry.NewEntryFragment"
         android:label="@string/title_diary"
         tools:layout="@layout/fragment_diary" />
 

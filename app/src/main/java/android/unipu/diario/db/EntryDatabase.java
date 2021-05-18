@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class EntryDatabase {
 
@@ -18,8 +19,7 @@ public class EntryDatabase {
 
     private Gson gson;
     private Context context;
-    private int index = 1;
-    private int lastIndex = 0;
+    private int index = 2;
 
     private static EntryDatabase instance;
 
@@ -50,7 +50,7 @@ public class EntryDatabase {
 
     private ArrayList<Entry> getDummyEntries() {
         entries = new ArrayList<>();
-        entries.add(new Entry(1, false, "Entry #1", "ahhhhhhhhhhhh", new Date()));
+        entries.add(new Entry(UUID.randomUUID().toString(), false, "Entry #1", "This is a sample diary entry. Hehe!", new Date()));
         return entries;
     }
 
@@ -80,17 +80,9 @@ public class EntryDatabase {
         return index;
     }
 
-    public Integer getLastId() {
-        if (entries.size() != 0) {
-            lastIndex = entries.size() - 1;
-            return entries.get(lastIndex).id;
-        }
-        return 0;
-    }
-
-    public Entry getEntryByID(Integer entryId) {
+    public Entry getEntryByID(String entryId) {
         for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).id == entryId) {
+            if (entries.get(i).id.equals(entryId)) {
                 return entries.get(i);
             }
         }
@@ -102,12 +94,20 @@ public class EntryDatabase {
         commit();
     }
 
+    public void editEntry(String entryId, String body) {
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).id.equals(entryId)) {
+                entries.get(i).setBody(body);
+            }
+        }
+        commit();
+    }
+
     public void deleteEntryAt(int position) {
         entries.remove(position);
         commit();
     }
-
-
+    
     public void commit() {
         String json = gson.toJson(new EntryWrapper(entries));
         SharedPreferences.Editor editor = context.getSharedPreferences(TABLE_ENTRIES, Context.MODE_PRIVATE).edit();

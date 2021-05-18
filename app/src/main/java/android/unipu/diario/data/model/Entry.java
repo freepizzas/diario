@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class Entry {
 
-    public Integer id;
+    public String id;
     public Boolean question;
     public String title;
     public String body;
@@ -16,11 +16,15 @@ public class Entry {
         return body.replace("\n", " ");
     }
 
-    public Entry(Integer id, Boolean question, String title, String body, Date date) {
+    public Entry(String id, Boolean question, String title, String body, Date date) {
         this.id = id;
         this.question = question;
         this.title = title;
         this.body = body;
         this.date = date;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

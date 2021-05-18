@@ -1,33 +1,32 @@
-package android.unipu.diario.ui.diary;
+package android.unipu.diario.ui.entry;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.unipu.diario.R;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import android.unipu.diario.R;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
 
-public class DiaryFragment extends Fragment {
+public class EditEntryFragment extends Fragment {
 
     private TextView entryTitle;
     private EditText entryBody;
-    private Integer indexEntry;
-    private Integer indexTotal;
-    private FloatingActionButton saveBtn;
+    private Entry entry;
+    private String entryId;
+    private FloatingActionButton editBtn;
     Context thisContext;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,19 +34,20 @@ public class DiaryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
         thisContext = container.getContext();
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            entryId = bundle.getString("entry_id");
+            entry = EntryDatabase.getInstance(getContext()).getEntryByID(entryId);
+        }
         entryTitle = root.findViewById(R.id.entry_title);
-        indexEntry = EntryDatabase.getInstance(thisContext).getEntryN();
-        entryTitle.setText("Entry #" + indexEntry);
-
+        entryTitle.setText("Editing " + entry.title);
         entryBody = root.findViewById(R.id.entry_body);
-
-        indexTotal = EntryDatabase.getInstance(thisContext).getLastId();
-        saveBtn = root.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        entryBody.setText(entry.body);
+        editBtn = root.findViewById(R.id.saveBtn);
+        editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EntryDatabase.getInstance(thisContext).addEntry(new Entry(indexTotal, false, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
-                EntryDatabase.getInstance(thisContext).augmentEntryN();
+                EntryDatabase.getInstance(thisContext).editEntry(entryId, entryBody.getText().toString());
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }

@@ -60,7 +60,7 @@
 
 <!--            <fragment-->
 <!--                android:id="@+id/fragment_entry"-->
-<!--                android:name="android.unipu.diario.ui.entry.EntryFragment"-->
+<!--                android:name="android.unipu.diario.ui.entry.EntryListItemFragment"-->
 <!--                android:tag="fragment_entry"-->
 <!--                tools:layout="@layout/fragment_entry"-->
 <!--                android:layout_width="match_parent"-->

@@ -1,8 +1,7 @@
 package android.unipu.diario.ui.calendar;
 
 import android.os.Bundle;
-import android.unipu.diario.adapter.ListViewAdapter;
-import android.unipu.diario.ui.entry.EntryFragment;
+import android.unipu.diario.ui.entry.EntryListItemFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class CalendarFragment extends Fragment implements ListViewAdapter.OnItemClickListener {
+public class CalendarFragment extends Fragment{
     private CalendarView calendarView;
     public String selectedDate;
 
@@ -34,23 +33,13 @@ public class CalendarFragment extends Fragment implements ListViewAdapter.OnItem
                 selectedDate = df.format(calendar.getTime());
                 Bundle bundle = new Bundle();
                 bundle.putString("selectedDate", selectedDate);
-                EntryFragment entryFragment = new EntryFragment();
-                entryFragment.setArguments(bundle);
+                EntryListItemFragment entryListItemFragment = new EntryListItemFragment();
+                entryListItemFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,
-                        entryFragment).addToBackStack(null).commit();
+                        entryListItemFragment).addToBackStack(null).commit();
 
             }
         });
         return root;
-    }
-
-    @Override
-    public void onItemClicked(int position) {
-
-    }
-
-    @Override
-    public void onLongClicked(View view, int position) {
-
     }
 }

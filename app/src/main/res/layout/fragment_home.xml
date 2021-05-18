@@ -72,7 +72,7 @@
 
         <fragment
             android:id="@+id/fragment_entry"
-            android:name="android.unipu.diario.ui.entry.EntryFragment"
+            android:name="android.unipu.diario.ui.entry.EntryListItemFragment"
             android:layout_width="match_parent"
             android:layout_height="431dp"
             android:paddingLeft="15dp"

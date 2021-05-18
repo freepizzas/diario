@@ -3,18 +3,15 @@ package android.unipu.diario.ui.entry;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.unipu.diario.MainActivity;
 import android.unipu.diario.R;
-import android.unipu.diario.adapter.ListViewAdapter;
+import android.unipu.diario.adapter.EntryListViewAdapter;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
+import android.unipu.diario.ui.entry.EditEntryFragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class EntryFragment extends Fragment implements ListViewAdapter.OnItemClickListener {
+public class EntryListItemFragment extends Fragment implements EntryListViewAdapter.OnItemClickListener {
 
-    private ListViewAdapter lAdapter;
+    private EntryListViewAdapter lAdapter;
     private RecyclerView recyclerView;
     public ArrayList<Entry> entries;
     public String selectedDate;
@@ -46,7 +43,7 @@ public class EntryFragment extends Fragment implements ListViewAdapter.OnItemCli
             entries = EntryDatabase.getInstance(getActivity()).getEntries();
         }
 
-        lAdapter = new ListViewAdapter(entries, this);
+        lAdapter = new EntryListViewAdapter(entries, this);
         recyclerView.setAdapter(lAdapter);
 
         return root;
@@ -54,10 +51,12 @@ public class EntryFragment extends Fragment implements ListViewAdapter.OnItemCli
 
     @Override
     public void onItemClicked(int position) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("action_type", "edit");
-        intent.putExtra("entry_id", lAdapter.entries.get(position).id);
-        startActivity(intent);
+        Bundle bundle = new Bundle();
+        bundle.putString("entry_id", lAdapter.entries.get(position).id);
+        EditEntryFragment editEntryFragment = new EditEntryFragment();
+        editEntryFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                editEntryFragment).addToBackStack(null).commit();
     }
 
     @Override
