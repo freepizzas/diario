@@ -49,6 +49,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:paddingEnd="10dp">
 
@@ -56,10 +58,10 @@
                         android:id="@+id/entry_body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:background="@null"
                         android:fontFamily="sans-serif-condensed"
                         android:text="Write something..."
+                        android:textAlignment="textStart"
                         android:textColor="#BE000000" />
 
                 </LinearLayout>
