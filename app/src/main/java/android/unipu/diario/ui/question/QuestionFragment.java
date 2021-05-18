@@ -46,7 +46,7 @@ public class QuestionFragment extends Fragment {
         thisContext = container.getContext();
 
         entryTitle = root.findViewById(R.id.entry_title);
-        entryTitle.setText(getQuestions(false));
+        entryTitle.setText(getQuestions());
 
         entryBody = root.findViewById(R.id.entry_body);
 
@@ -64,13 +64,13 @@ public class QuestionFragment extends Fragment {
         newQBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                entryTitle.setText(getQuestions(true));
+                entryTitle.setText(getQuestions());
             }
         });
         return root;
     }
 
-    private String getQuestions(Boolean random) {
+    private String getQuestions() {
         Random rand = new Random();
         List<String> questions = new ArrayList<>();
         questions.add("What’s your biggest regret?");
@@ -80,10 +80,7 @@ public class QuestionFragment extends Fragment {
         questions.add("What would you change in your life?");
         questions.add("Who is your favorite historical figure?");
         questions.add("Dogs or Cats?");
-        questions.add("If you could get away with anything that you do?");
         questions.add("What fictional character do you most relate to?");
-        if(random) {
-            return questions.get(rand.nextInt(questions.size()));
-        } else return questions.get(1);
+        return questions.get(rand.nextInt(questions.size()));
     }
 }

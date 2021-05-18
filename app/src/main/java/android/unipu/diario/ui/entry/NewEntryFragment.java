@@ -44,7 +44,6 @@ public class NewEntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EntryDatabase.getInstance(thisContext).addEntry(new Entry(UUID.randomUUID().toString(), false, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
-                EntryDatabase.getInstance(thisContext).augmentEntryN();
                 Toast.makeText(getActivity(), "Created new entry",
                         Toast.LENGTH_LONG).show();
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);

@@ -51,7 +51,7 @@ public class EditEntryFragment extends Fragment {
             entryId = bundle.getString("entry_id");
             entry = EntryDatabase.getInstance(getContext()).getEntryByID(entryId);
             entryTitle = root.findViewById(R.id.entry_title);
-            entryTitle.setText("Editing " + entry.title);
+            entryTitle.setText(entry.title);
             entryBody = root.findViewById(R.id.entry_body);
             entryBody.setText(entry.body);
 

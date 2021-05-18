@@ -19,7 +19,7 @@ public class EntryDatabase {
 
     private Gson gson;
     private Context context;
-    private int index = 2;
+    private Integer index;
 
     private static EntryDatabase instance;
 
@@ -72,12 +72,14 @@ public class EntryDatabase {
         return entriesOnDate;
     }
 
-    public Integer augmentEntryN(){
+    public Integer getEntryN() {
+        index = 1;
+        for (int i = 0; i < entries.size(); i++) {
+            if (!entries.get(i).question) {
+                index++;
+            }
+        }
         return index++;
-    }
-
-    public Integer getEntryN(){
-        return index;
     }
 
     public Entry getEntryByID(String entryId) {
