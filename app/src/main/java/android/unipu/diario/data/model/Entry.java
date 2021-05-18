@@ -1,10 +1,11 @@
 package android.unipu.diario.data.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Entry {
+public class Entry implements Serializable {
 
     public String id;
     public Boolean question;
@@ -30,8 +31,8 @@ public class Entry {
 
     @Override
     public String toString() {
-        return new StringBuffer("Date: ").append(this.date).append(System.getProperty("line.separator")).
-                append("Title: ").append(this.title).append(System.getProperty("line.separator")).
-                append("Text: ").append(this.body).toString();
+        return "Date: " + this.date.toString() + System.getProperty("line.separator") +
+                "Title: " + this.title + System.getProperty("line.separator") +
+                "Text: " + this.body;
     }
 }

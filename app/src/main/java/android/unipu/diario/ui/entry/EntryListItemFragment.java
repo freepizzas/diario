@@ -74,19 +74,6 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .show();
-        new AlertDialog.Builder(context)
-                .setTitle("Delete entry")
-                .setMessage("Are you sure you want to delete this entry?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EntryDatabase.getInstance(context).deleteEntryAt(position);
-                        lAdapter.notifyItemRemoved(position);
-                        refreshList();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
     }
 
     public void refreshList() {
