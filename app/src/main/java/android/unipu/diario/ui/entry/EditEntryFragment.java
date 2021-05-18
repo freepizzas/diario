@@ -60,7 +60,7 @@ public class EditEntryFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     EntryDatabase.getInstance(thisContext).editEntry(entryId, entryBody.getText().toString());
-                    Toast.makeText(getActivity(), "Entry successfully saved.",
+                    Toast.makeText(getActivity(), "Entry successfully saved",
                             Toast.LENGTH_LONG).show();
                 }
             });
