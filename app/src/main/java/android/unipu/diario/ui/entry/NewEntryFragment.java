@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import android.unipu.diario.R;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,6 +45,8 @@ public class NewEntryFragment extends Fragment {
             public void onClick(View v) {
                 EntryDatabase.getInstance(thisContext).addEntry(new Entry(UUID.randomUUID().toString(), false, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
                 EntryDatabase.getInstance(thisContext).augmentEntryN();
+                Toast.makeText(getActivity(), "Created new entry",
+                        Toast.LENGTH_LONG).show();
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }

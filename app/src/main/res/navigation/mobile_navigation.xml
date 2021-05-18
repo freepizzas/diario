@@ -12,6 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_editentry"
+        android:name="android.unipu.diario.ui.entry.EditEntryFragment"
+        android:label="@string/title_editentry"
+        tools:layout="@layout/fragment_editentry">
+        <action
+            android:id="@+id/action_c_to_a"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@+id/navigation_home"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
         android:id="@+id/navigation_diary"
         android:name="android.unipu.diario.ui.entry.NewEntryFragment"
         android:label="@string/title_diary"

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -49,20 +50,22 @@ public class EditEntryFragment extends Fragment {
         if (bundle != null) {
             entryId = bundle.getString("entry_id");
             entry = EntryDatabase.getInstance(getContext()).getEntryByID(entryId);
+            entryTitle = root.findViewById(R.id.entry_title);
+            entryTitle.setText("Editing " + entry.title);
+            entryBody = root.findViewById(R.id.entry_body);
+            entryBody.setText(entry.body);
+
+            editBtn = root.findViewById(R.id.saveBtn);
+            editBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EntryDatabase.getInstance(thisContext).editEntry(entryId, entryBody.getText().toString());
+                    Toast.makeText(getActivity(), "Entry successfully saved",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
         }
-        entryTitle = root.findViewById(R.id.entry_title);
-        entryTitle.setText("Editing " + entry.title);
-        entryBody = root.findViewById(R.id.entry_body);
-        entryBody.setText(entry.body);
-        editBtn = root.findViewById(R.id.saveBtn);
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EntryDatabase.getInstance(thisContext).editEntry(entryId, entryBody.getText().toString());
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.navigation_home);
-            }
-        });
+
 
         exportBtn = root.findViewById(R.id.exportBtn);
         exportBtn.setOnClickListener(new View.OnClickListener() {
