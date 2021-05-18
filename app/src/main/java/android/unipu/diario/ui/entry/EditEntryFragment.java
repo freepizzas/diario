@@ -1,5 +1,6 @@
 package android.unipu.diario.ui.entry;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,8 +22,10 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -65,10 +68,11 @@ public class EditEntryFragment extends Fragment {
         exportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "file.txt");
+                String entryTitle = entry.title.replace(" ", "");
+                File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), entryTitle + ".txt");
                 try {
-                    ObjectOutput out = new ObjectOutputStream(new FileOutputStream(outFile));
-                    out.writeObject(entry);
+                    BufferedWriter out = new BufferedWriter(new FileWriter(outFile));
+                    out.write(entry.toString());
                     out.close();
                 } catch (IOException e) {
                     e.printStackTrace();
