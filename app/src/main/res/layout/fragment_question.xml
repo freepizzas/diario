@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.question.QuestionFragment">
 
     <LinearLayout
@@ -12,7 +13,6 @@
         android:background="@drawable/bg"
         android:orientation="vertical"
         tools:context=".MainActivity">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="117dp"
@@ -24,14 +24,14 @@
                 android:id="@+id/entry_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:letterSpacing="0.04"
+                android:fontFamily="@font/baloo"
+                android:lineSpacingExtra="-12sp"
                 android:text="What would you do with a million dollars?"
+                android:textAlignment="center"
                 android:textColor="#fff"
-                android:textSize="28dp" />
+                android:textSize="32sp" />
 
         </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,30 +42,27 @@
                 android:id="@+id/newQBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="25dp"
                 android:backgroundTint="#00FFFFFF"
                 android:src="@drawable/ic_refresh"
                 android:tint="#FFFFFF" />
         </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingStart="20dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="20dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingEnd="10dp">
-
                     <EditText
                         android:id="@+id/entry_body"
                         android:layout_width="wrap_content"
@@ -74,25 +71,28 @@
                         android:fontFamily="sans-serif-condensed"
                         android:text="Write something..."
                         android:textColor="#BE000000" />
-
                 </LinearLayout>
             </ScrollView>
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:clickable="true"
-                app:tint="@color/white"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:longClickable="true"
                 android:src="@android:drawable/ic_menu_save"
-                app:maxImageSize="56dp"
-                app:rippleColor="#F3F0F0"
-                app:backgroundTint="#FF6200EE"
-                />
+                app:backgroundTint="#A77FEF"
+                app:borderWidth="0dp"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:maxImageSize="28dp"
+                app:rippleColor="@color/white"
+                app:tint="@color/white" />
 
         </RelativeLayout>
 
