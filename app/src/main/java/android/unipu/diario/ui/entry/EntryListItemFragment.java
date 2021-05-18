@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,11 +27,12 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
     private RecyclerView recyclerView;
     public ArrayList<Entry> entries;
     public String selectedDate;
+    View root;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_entrylistitem, container, false);
+        root = inflater.inflate(R.layout.fragment_entrylistitem, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -54,8 +57,9 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
         bundle.putString("entry_id", lAdapter.entries.get(position).id);
         EditEntryFragment editEntryFragment = new EditEntryFragment();
         editEntryFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                editEntryFragment).addToBackStack(null).commit();
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.navigation_editentry, bundle);
+
     }
 
     @Override
