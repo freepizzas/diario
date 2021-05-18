@@ -107,7 +107,7 @@ public class EntryDatabase {
         entries.remove(position);
         commit();
     }
-    
+
     public void commit() {
         String json = gson.toJson(new EntryWrapper(entries));
         SharedPreferences.Editor editor = context.getSharedPreferences(TABLE_ENTRIES, Context.MODE_PRIVATE).edit();

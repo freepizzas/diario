@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,7 @@ public class NewEntryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_diary, container, false);
+        View root = inflater.inflate(R.layout.fragment_newentry, container, false);
         thisContext = container.getContext();
         entryTitle = root.findViewById(R.id.entry_title);
         indexEntry = EntryDatabase.getInstance(thisContext).getEntryN();

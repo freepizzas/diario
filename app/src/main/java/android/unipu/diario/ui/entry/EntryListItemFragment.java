@@ -8,7 +8,6 @@ import android.unipu.diario.R;
 import android.unipu.diario.adapter.EntryListViewAdapter;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
-import android.unipu.diario.ui.entry.EditEntryFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_entry, container, false);
+        View root = inflater.inflate(R.layout.fragment_entrylistitem, container, false);
         recyclerView = root.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -62,6 +61,19 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
     @Override
     public void onLongClicked(View view, final int position) {
         final Context context = getContext();
+        new AlertDialog.Builder(context)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EntryDatabase.getInstance(context).deleteEntryAt(position);
+                        lAdapter.notifyItemRemoved(position);
+                        refreshList();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
         new AlertDialog.Builder(context)
                 .setTitle("Delete entry")
                 .setMessage("Are you sure you want to delete this entry?")

@@ -53,17 +53,6 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingRight="250dp"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="center"
-            android:src="@drawable/ic_export"
-            android:tint="#516b9e" />
-
     </LinearLayout>
 
     <RelativeLayout
@@ -76,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="431dp"
             android:paddingLeft="15dp"
-            tools:layout="@layout/fragment_entry" />
+            tools:layout="@layout/fragment_entrylistitem" />
     </RelativeLayout>
 
 

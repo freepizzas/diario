@@ -27,4 +27,11 @@ public class Entry {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuffer("Date: ").append(this.date).append(System.getProperty("line.separator")).
+                append("Title: ").append(this.title).append(System.getProperty("line.separator")).
+                append("Text: ").append(this.body).toString();
+    }
 }

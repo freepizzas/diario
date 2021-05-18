@@ -2,13 +2,16 @@ package android.unipu.diario.ui.entry;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.unipu.diario.R;
 import android.unipu.diario.data.model.Entry;
 import android.unipu.diario.db.EntryDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +21,11 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Date;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 
 public class EditEntryFragment extends Fragment {
 
@@ -27,11 +34,12 @@ public class EditEntryFragment extends Fragment {
     private Entry entry;
     private String entryId;
     private FloatingActionButton editBtn;
+    private ImageButton exportBtn;
     Context thisContext;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_diary, container, false);
+        View root = inflater.inflate(R.layout.fragment_editentry, container, false);
         thisContext = container.getContext();
 
         Bundle bundle = this.getArguments();
@@ -50,6 +58,21 @@ public class EditEntryFragment extends Fragment {
                 EntryDatabase.getInstance(thisContext).editEntry(entryId, entryBody.getText().toString());
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
+            }
+        });
+
+        exportBtn = root.findViewById(R.id.exportBtn);
+        exportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "file.txt");
+                try {
+                    ObjectOutput out = new ObjectOutputStream(new FileOutputStream(outFile));
+                    out.writeObject(entry);
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return root;
