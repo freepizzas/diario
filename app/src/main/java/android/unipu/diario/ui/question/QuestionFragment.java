@@ -21,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.unipu.diario.R;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,6 +56,8 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EntryDatabase.getInstance(thisContext).addEntry(new Entry(UUID.randomUUID().toString(), true, entryTitle.getText().toString(), entryBody.getText().toString(), new Date()));
+                Toast.makeText(getActivity(), "Created new entry",
+                        Toast.LENGTH_LONG).show();
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.navigation_home);
             }
