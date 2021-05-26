@@ -64,27 +64,20 @@ public class EntryListItemFragment extends Fragment implements EntryListViewAdap
 
     @Override
     public void onLongClicked(View view, final int position) {
-        final Context context = getContext();
-        new AlertDialog.Builder(context)
-                .setTitle("Delete entry")
-                .setMessage("Are you sure you want to delete this entry?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EntryDatabase.getInstance(context).deleteEntryAt(position);
-                        lAdapter.notifyItemRemoved(position);
-                        refreshList();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .show();
-    }
-
-    public void refreshList() {
-        if (lAdapter.entries.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
+        if (getParentFragment() != null) {
+            final Context context = getContext();
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete entry")
+                    .setMessage("Are you sure you want to delete this entry?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            EntryDatabase.getInstance(context).deleteEntryAt(position);
+                            lAdapter.notifyItemRemoved(position);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
         }
     }
 }
