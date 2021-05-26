@@ -72,12 +72,16 @@ public class EditEntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String entryTitle = entry.title.replace(" ", "");
-                File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), entryTitle + ".txt");
+                File outFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), entryTitle + ".txt");
                 try {
                     BufferedWriter out = new BufferedWriter(new FileWriter(outFile));
                     out.write(entry.toString());
                     out.close();
+                    Toast.makeText(getActivity(), "Saved entry to Downloads",
+                            Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
+                    Toast.makeText(getActivity(), "Unable to save - missing storage permission",
+                            Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }

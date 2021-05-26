@@ -83,6 +83,8 @@ public class QuestionFragment extends Fragment {
         questions.add("What would you change in your life?");
         questions.add("Who is your favorite historical figure?");
         questions.add("Dogs or Cats?");
+        questions.add("How are you?");
+        questions.add("What's your biggest pet peeve?");
         questions.add("What fictional character do you most relate to?");
         return questions.get(rand.nextInt(questions.size()));
     }
