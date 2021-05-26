@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <CalendarView
                 android:id="@+id/calendarView"
@@ -48,31 +48,24 @@
                 android:dateTextAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:showWeekNumber="true"
                 android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body2" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp"/>
-
-        <RelativeLayout
             android:id="@+id/fragment_layout"
             android:layout_width="match_parent"
-
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:tag="fragment_entry">
+            android:orientation="vertical"
+            android:paddingLeft="15dp">
 
-            <!--            <fragment-->
-            <!--                android:id="@+id/fragment_entry"-->
-            <!--                android:name="android.unipu.diario.ui.entry.EntryListItemFragment"-->
-            <!--                android:tag="fragment_entry"-->
-            <!--                tools:layout="@layout/fragment_entry"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"/>-->
-        </RelativeLayout>
+<!--            <fragment-->
+<!--                android:id="@+id/fragment_entry"-->
+<!--                android:name="android.unipu.diario.ui.entry.EntryListItemFragment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:paddingLeft="15dp"-->
+<!--                tools:layout="@layout/fragment_entrylistitem" />-->
+        </LinearLayout>
 
 
     </LinearLayout>
